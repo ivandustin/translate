@@ -1,0 +1,21 @@
+{
+    "name": "translatia",
+    "description": "Translate manuscript",
+    "version": "0.1.0",
+    "license": "GPL-3.0-or-later",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ivandustin/translate"
+    },
+    "dependencies": {
+        "argparse": "^2.0.1",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    },
+    "bin": {
+        "translate": "index.js"
+    },
+    "scripts": {
+        "dev": "nodemon index.js"
+    }
+}
