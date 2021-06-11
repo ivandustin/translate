@@ -9,9 +9,11 @@
     import delay        from './lib/delay.js'
     import next_tick    from './lib/next-tick.js'
     import groupid      from './lib/groupid.js'
+    import VirtualList  from '@sveltejs/svelte-virtual-list'
 
     let words  = []
     let groups = []
+    let start  = 0
 
     async function main() {
         words  = await get(`${settings.api}/words`)
@@ -19,19 +21,18 @@
         words  = variants.apply(words)
         groups = groupby(words, ['chapter_id', 'verse_id'])
         groups = groupid.apply(groups)
-        goto_incomplete(groups)
+        start  = get_start(groups)
     }
 
     function is_incomplete(group) {
         return group.filter(word => !word.to).length > 0
     }
 
-    function goto_incomplete(groups) {
-        next_tick(function() {
-            let group = groups.find(is_incomplete)
-            if (group)
-                document.getElementById(group.id).scrollIntoView()
-        })
+    function get_start(groups) {
+        let index = groups.findIndex(is_incomplete)
+        index     = index == -1 ? 0 : index
+        index     = index == 0  ? 0 : index - 1
+        return index
     }
 
     async function save(word) {
@@ -51,8 +52,8 @@
     onMount(main)
 </script>
 
-<div class="uppercase pad-bottom">
-    {#each groups as group}
+<div class="uppercase full-height">
+    <VirtualList items={groups} let:item={group} bind:start>
         <div>
             <div id="{group.id}" class="group">
                 <h2>
@@ -81,7 +82,7 @@
                 {/each}
             </div>
         </div>
-    {/each}
+    </VirtualList>
 </div>
 
 <style type="text/css">
@@ -102,5 +103,8 @@
     }
     .pad-bottom {
         padding-bottom: 10%;
+    }
+    .full-height {
+        height: 100%;
     }
 </style>
