@@ -1,7 +1,6 @@
-const ms  = 1000
-let timer = null
+const ms = 1000
 
 export default function delay(fn) {
-    clearTimeout(timer)
-    timer = setTimeout(fn, ms)
+    clearTimeout(fn.timer)
+    fn.timer = setTimeout(fn, ms)
 }
