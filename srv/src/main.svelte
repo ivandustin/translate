@@ -101,9 +101,6 @@
     .row {
         margin: 16px 0;
     }
-    .pad-bottom {
-        padding-bottom: 10%;
-    }
     .full-height {
         height: 100%;
     }
