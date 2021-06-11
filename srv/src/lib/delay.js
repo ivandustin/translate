@@ -1,4 +1,4 @@
-const ms  = 200
+const ms  = 1000
 let timer = null
 
 export default function delay(fn) {
