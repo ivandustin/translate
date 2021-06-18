@@ -9,11 +9,11 @@
     import delay        from './lib/delay.js'
     import next_tick    from './lib/next-tick.js'
     import groupid      from './lib/groupid.js'
-    import VirtualList  from '@sveltejs/svelte-virtual-list'
+    import VirtualList  from './svelte-virtual-list'
 
     let words  = []
     let groups = []
-    let start  = 0
+    let offset = 0
 
     async function main() {
         words  = await get(`${settings.api}/words`)
@@ -21,14 +21,14 @@
         words  = variants.apply(words)
         groups = groupby(words, ['chapter_id', 'verse_id'])
         groups = groupid.apply(groups)
-        start  = get_start(groups)
+        offset = get_offset(groups)
     }
 
     function is_incomplete(group) {
         return group.filter(word => !word.to).length > 0
     }
 
-    function get_start(groups) {
+    function get_offset(groups) {
         let index = groups.findIndex(is_incomplete)
         index     = index == -1 ? 0 : index
         index     = index == 0  ? 0 : index - 1
@@ -53,7 +53,7 @@
 </script>
 
 <div class="uppercase full-height">
-    <VirtualList items={groups} let:item={group} bind:start>
+    <VirtualList items={groups} let:item={group} bind:offset>
         <div>
             <div id="{group.id}" class="group">
                 <h2>
