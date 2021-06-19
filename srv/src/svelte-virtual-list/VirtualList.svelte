@@ -128,20 +128,31 @@
 	}
 
 	function scroll() {
-		const max_speed = 250
-		let target      = offset
-		let x           = viewport.scrollTop
-		let indexes     = visible.map(value => value.index)
-		let index       = indexes.indexOf(target)
-		let found       = index != -1
+		let start  = null
+		let target = offset
+		let speed  = 250
 
-		if (!found) {
-			window.requestAnimationFrame(scroll)
-			viewport.scrollTo(0, x + max_speed)
-		} else {
-			let object = rows[index]
-			viewport.scrollTo(0, object.offsetTop)
+		function step(time) {
+			if (start == null)
+				start = time
+
+			let elapsed = time - start
+			let delta   = elapsed * (speed / 1000)
+			let x       = viewport.scrollTop
+			let indexes = visible.map(value => value.index)
+			let index   = indexes.indexOf(target)
+			let found   = index != -1
+
+			if (!found) {
+				window.requestAnimationFrame(step)
+				viewport.scrollTo(0, x + delta)
+			} else {
+				let object = rows[index]
+				viewport.scrollTo(0, object.offsetTop)
+			}
 		}
+
+		window.requestAnimationFrame(step)
 	}
 
 	// trigger initial refresh
