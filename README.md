@@ -21,4 +21,10 @@ of Matthew with the filename `40.json`.
     translate reduction/books/40.json
     ```
 
-1. Go to http://localhost:2122 in your browser.
+1. Go to http://localhost:2122 in your browser and use the app.
+1. Use [CNTR](https://greekcntr.org/collation/index.htm) as your translation guide.
+
+> The app automatically saves your changes. It is written directly in the input `.json` file.
+
+You can publish your work by creating a separate repository in Github.
+See this [repository](https://github.com/ivandustin/translation-ph) as an example.
