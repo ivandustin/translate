@@ -1,7 +1,7 @@
 {
     "name": "translatia",
     "description": "Translate manuscript",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "GPL-3.0-or-later",
     "repository": {
         "type": "git",
@@ -17,6 +17,7 @@
         "translate-find": "find.js"
     },
     "scripts": {
-        "dev": "nodemon index.js"
+        "dev": "nodemon index.js",
+        "postinstall": "cd srv && npm run build"
     }
 }
