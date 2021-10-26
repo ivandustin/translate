@@ -28,3 +28,11 @@ of Matthew with the filename `40.json`.
 
 You can publish your work by creating a separate repository in Github.
 See this [repository](https://github.com/ivandustin/translation-ph) as an example.
+
+## Screenshot
+
+Here is a sample screenshot featuring the book of Mark chapter 1 verse 1 translated to Tagalog (Philippines).
+
+![Mark 1:1](https://user-images.githubusercontent.com/3872381/138798060-a2548ccc-7ce5-407d-9c84-3c35ad789546.png)
+
+> The app is originally designed for an iPad + Apple Pencil.
